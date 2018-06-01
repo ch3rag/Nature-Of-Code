@@ -34,7 +34,7 @@ class LCG {
   float getRand() {
     long num = (A * seed + C) % M;
     seed = num;
-    return (float)num/M;
+    return (float)num/M - 0.48;
   }
   
 };
@@ -52,33 +52,31 @@ int frequency;
 int wavelength;
 double a;
 double b;
-int scale = 100;
+
 
 void setup() {
  size(640, 360);
  x = 0;
  y = height / 2;
  amplitude = 100;
- wavelength = 50;
+ wavelength = 100;
  frequency = 1 / wavelength;
  generator = new LCG(100);
- a = generator.getRand()*scale;
- b = generator.getRand()*scale;
+ a = generator.getRand()*amplitude;
+ b = generator.getRand()*amplitude;
  stroke(0);
  strokeWeight(2);
 }
 
 void draw() {
-
  if(x % wavelength == 0) {
    a = b;
-   b = generator.getRand()*scale;
-   y = (height / 2 + a * amplitude);
+   b = generator.getRand()*amplitude;
  } else {
    y = (height / 2 + cosineInterpolate(a, b, (x % wavelength) / wavelength));
  }
- point((int)x, (int)y);
  x++;
+ point((int)x, (int)y);
    
   
 }
