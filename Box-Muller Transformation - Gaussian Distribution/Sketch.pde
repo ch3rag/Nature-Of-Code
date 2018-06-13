@@ -20,5 +20,5 @@ void draw() {
  fill(0,10); 
  noStroke();
  ellipse(x,height/2,16,16);
-  
+ 
 }
