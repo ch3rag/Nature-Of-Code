@@ -165,18 +165,14 @@ void setup() {
 
 	size(640,360);
 	rectMode(CENTER);
-    s = new Spring(width/2 + 100, height/2, 100, 0.05);
+   	s = new Spring(width/2 + 100, height/2, 100, 0.05);
 	s2 = new Spring(width/2 - 100, height/2, 100, 0.01);
-
-
 	bob = new Bob(width/2, height/2);
 }
 
 void draw() {
 	
 	background(255);
-
-
 	s.connect(bob);
 	s2.connect(bob);
 	s.constrainLength(bob,s.restLength/2,s.restLength*2);
