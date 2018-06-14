@@ -57,7 +57,7 @@ class FlowField {
 
   }
 
-  //3D Perlin Noise (Performance Overhead)
+  // 3D Perlin Noise (Performance Overhead)
   // Updates complete field when called
 
   void updateFlowField() { 
