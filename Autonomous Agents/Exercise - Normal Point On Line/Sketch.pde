@@ -8,8 +8,8 @@ PVector end;
 void setup() {
 
 	size(640, 480);
-	start = new PVector(10, height/3);
-	end = new PVector(width - 10, height - 100);
+	start = new PVector(30, height/3);
+	end = new PVector(width - 30, height - 100);
 
 
 }
@@ -36,10 +36,11 @@ void draw() {
 	b.normalize();
 	b.mult(distance);
 	PVector normalPoint = PVector.add(start, b);
+	normalPoint.x = constrain(normalPoint.x, start.x, end.x);
+	normalPoint.y = constrain(normalPoint.y, start.y, end.y);
 
 	drawLine(start, mousePos);
 	drawLine(mousePos, normalPoint);
 	fill(0,255,0);
 	ellipse(normalPoint.x, normalPoint.y, 7, 7);
-  
 }
