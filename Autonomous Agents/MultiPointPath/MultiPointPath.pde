@@ -5,16 +5,12 @@ void setup() {
 
 	size(640, 480);
 	p = new Path();
-	p.addPoint(40,40);
-	p.addPoint(width-40,40);
-	p.addPoint(width-40,height-40);
-	p.addPoint(40,height-40);
-	p.addPoint(40,40);
-	v.add(new Vehicle(width/2 - 100, height/2));
-	v.add(new Vehicle(width/2 + 100, height/2));
-	v.add(new Vehicle(width/2, height/2 + 100));
-	v.add(new Vehicle(width/2, height/2 - 100));
-
+	p.addPoint(60,60);
+	p.addPoint(width/2 - 100, height/2 - 120);
+	p.addPoint(width-60,60);
+	p.addPoint(width-60,height-60);
+	p.addPoint(width/2 + 100, height/2 + 120);
+	p.addPoint(60,height-60);
 
 }	
 
@@ -22,6 +18,10 @@ void draw() {
 
 	background(255);
 	p.draw();
+
+	if(mousePressed) {
+		v.add(new Vehicle(mouseX, mouseY));
+	}
 
 	for(Vehicle v_ : v) {
 
