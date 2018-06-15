@@ -10,7 +10,7 @@ class Vehicle {
 	Vehicle(float x, float y) {
 
 		position = new PVector(x,y);
-		velocity = new PVector(random(-1,1), random(-1,1));
+		velocity = new PVector(maxSpeed, random(-1,1));
 		acceleration = new PVector(0,0);
 
 	}
@@ -32,7 +32,7 @@ class Vehicle {
 
 	void followPath(Path p) {
 
-		float predictionDistance = 50;
+		float predictionDistance = 20;
 
 		PVector prediction = velocity.get();
 		prediction.normalize();
@@ -41,46 +41,45 @@ class Vehicle {
 	
 
 		PVector leastNormalPoint = null;
-		PVector target = null;
-		float leastDistance = 99999;
+		PVector targetDir = null;
+		float leastDistance = 999999;
 		int x = 0;
 
-		for(int i = 0 ; i < p.points.size() - 1 ; i++) {
+		for(int i = 0 ; i < p.points.size(); i++) {
 
 			PVector a = p.points.get(i);
-			PVector b = p.points.get(i+1);;
+			PVector b = p.points.get((i+1) % p.points.size());
+
 			PVector normalPoint = p.getNormalPoint(a, b, prediction);
+			
 
-			if(a.x > b.x) {
-				normalPoint.x = constrain(normalPoint.x, b.x, a.x);
-			} else {
-				normalPoint.x = constrain(normalPoint.x, a.x, b.x);
+			if(normalPoint.x < min(a.x, b.x) || normalPoint.x > max(a.x, b.x) || normalPoint.y < min(a.y, b.y) || normalPoint.y > max(a.y,b.y)) {
+
+				normalPoint = b.get();
+				a = p.points.get((i + 1) % p.points.size());
+				b = p.points.get((i + 2) % p.points.size());
 			}
 
-			if(a.y > b.y) {
-				normalPoint.y = constrain(normalPoint.y, b.y, a.y);
-			} else {
-				normalPoint.y = constrain(normalPoint.y, a.y, b.y);
-			}
-
+			PVector dir = PVector.sub(b,a);
 			float distance = PVector.dist(normalPoint, prediction);
 
 			if(distance < leastDistance) {
 				leastDistance = distance;
 				leastNormalPoint = normalPoint.get();
-				x = i;
+				targetDir = dir.get();
 			}
 		}
-		float distance = PVector.dist(leastNormalPoint, prediction);
-		target = PVector.sub(p.points.get(x+1),p.points.get(x));
-		target.normalize();
-		target.mult(30);
-		target.add(leastNormalPoint);
 
-		if(distance > p.radius) {
-			seek(target);
+		targetDir.normalize();
+		targetDir.mult(30);
+		targetDir.add(leastNormalPoint);
+
+		if(leastDistance > p.radius) {
+			seek(targetDir);
+		} else {
+			velocity.setMag(maxSpeed);
 		}
-		drawFollowPathDebugData(prediction, leastNormalPoint, target); 
+		//drawFollowPathDebugData(prediction, leastNormalPoint, targetDir); 
 		//DRAWS DEBUG DATA
 	}
 
@@ -132,6 +131,8 @@ class Vehicle {
 		} else if(position.y < 0) {
 			position.y = height;
 		}
+
 	}
+
 }
 
