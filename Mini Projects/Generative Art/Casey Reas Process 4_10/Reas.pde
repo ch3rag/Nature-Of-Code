@@ -1,4 +1,6 @@
 
+//PRESS MOUSE BUTTON TO START
+
 ArrayList <Element> elements = new ArrayList <Element> ();
 boolean  start = false;
 
