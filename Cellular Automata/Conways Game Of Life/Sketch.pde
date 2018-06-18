@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 GameOfLife gol;
-int rule;
 void setup() {
 
 	size(800,800);
