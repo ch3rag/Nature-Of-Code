@@ -1,3 +1,7 @@
+// CHIRAG SINGH RAJPUT
+// Github.com/IamBharatSingh
+// Line Class
+
 class Line  {
 
 	PVector start;
