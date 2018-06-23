@@ -1,3 +1,6 @@
+// CHIRAG SINGH RAJPUT
+// Github.com/IamBharatSingh
+// Seirspinski Triangle From Fractal Tree
 
 float x = 0;
 void setup() {
