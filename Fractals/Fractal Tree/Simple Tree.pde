@@ -1,3 +1,6 @@
+// CHIRAG SINGH RAJPUT
+// Github.com/IamBharatSingh
+// Simple Fractal Tree
 
 void setup() {
 
