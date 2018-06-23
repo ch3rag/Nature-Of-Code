@@ -1,3 +1,7 @@
+// CHIRAG SINGH RAJPUT
+// Github.com/IamBharatSingh
+// Seirspinski Triangle (Arrow Head Curve)
+
 void setup() {
 	
 	size(800, 800);
