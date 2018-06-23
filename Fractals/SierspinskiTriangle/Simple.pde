@@ -11,7 +11,6 @@ void setup() {
 
 }
 
-
 void draw() {
 
 	seirspinski(width/2, 0, 800,7);
